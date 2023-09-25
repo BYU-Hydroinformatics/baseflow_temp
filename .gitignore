@@ -1,0 +1,71 @@
+# macOS system files
+.DS_Store
+
+# Python virtual environment
+venv/
+__pycache__/
+
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Editor-specific files
+.vscode/
+*.idea/
+
+# Dependency folders
+node_modules/
+dist/
+build/
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.pyd
+
+# Compiled libraries
+lib/
+lib64/
+
+# Logs and temporary files
+*.log
+*.swp
+*.swo
+*.tmp
+logs/
+temp/
+
+# Environment files
+.env
+*.env
+
+# Compiled bytecode (e.g. from Cython)
+*.c
+*.cpp
+*.pyx
+*.pyd
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files (such as generated CSVs or database files)
+*.csv
+*.sqlite
+
+# Compiled LaTeX files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+
+# macOS folder attributes
+.AppleDouble
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
