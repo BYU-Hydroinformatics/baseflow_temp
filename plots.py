@@ -1,12 +1,3 @@
-'''
-    what we need:
-        1- Hydrograph recession curve
-        2- each model plot
-        3- threshold method plot (quantiles based on year and month periods)
-        4- BFO interval highlight     
-'''
-
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -68,11 +59,11 @@ def plot_discharge_and_models(df, model_columns):
     """
         
     # Extract Date and Discharge columns
-    date = df.index
+    date = df['Date']
     discharge = df['Discharge']
     
     # Create a plot for Discharge
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(14, 6))
     plt.plot(date, discharge, label='Discharge', color='blue', linewidth=2)
 
     # Plot additional models

@@ -10,7 +10,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def main():
-    dataset = fetch_and_process_usgs_data('01636500', '2018-01-01', '2019-10-01')
+    dataset = fetch_and_process_usgs_data('01636500', '2019-06-10', '2023-10-07')
     cleaned_dataset = clean_ffill(dataset)
     dataset_models = cleaned_dataset.copy()
     dataset_models = separate_date_parameters(dataset_models)
@@ -21,7 +21,7 @@ def main():
     
     dataset_models = quantiles(dataset_models, 'Month', 0.9)
 
-    column_names = dataset_models.columns[4:].tolist()
+    column_names = dataset_models.columns[5:].tolist()
 
     label_rows(dataset_models, column_names, 200)
 
@@ -29,14 +29,17 @@ def main():
     # plot the data
     plot_discharge_and_models(dataset_models, column_names)
     # plot_hydrograph_recession(dataset_models)
+    print (dataset_models.head(10))
 
 if __name__ == "__main__":
     main()
 
 
 
-#    +------------+-----------+------+-------+-----+---------+---------+
-#    |            | Discharge | Year | Month | Day | Model 1 | Model 2 |
-#    +------------+-----------+------+-------+-----+---------+---------+
-#    | YYYY-MM-DD |           |      |       |     |         |         |
-#    +------------+-----------+------+-------+-----+---------+---------+
+# +------------+-----------+------+-------+-----+--------------+---------+----------+-----------------+--------------------+-------+
+# | Date       | Discharge | Year | Month | Day | Lyne_Hollick | Chapman | Eckhardt | Chapman_Maxwell | Month Quantile 0.9 | Label |
+# +------------+-----------+------+-------+-----+--------------+---------+----------+-----------------+--------------------+-------+
+# | YYYY-MM-DD |           |      |       |     |              |         |          |                 |                    | BFO   |
+# |            |           |      |       |     |              |         |          |                 |                    |       |
+# +------------+-----------+------+-------+-----+--------------+---------+----------+-----------------+--------------------+-------+
+

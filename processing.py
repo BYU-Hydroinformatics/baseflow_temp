@@ -56,7 +56,7 @@ def fetch_and_process_usgs_data(station_number, start_date, end_date):
     filename = folder+'/USGS_Data_for_' + station_number  + '.txt'
     columns = ['Date', 'Discharge (cfs)']
     df = pd.read_csv(filename, header=None, names=columns, parse_dates=[0])
-    df.set_index('Date', inplace=True)
+    # df.set_index('Date', inplace=True)
     # df = df.set_index(['Date'])
     df['Discharge (cfs)'] = pd.to_numeric(df['Discharge (cfs)'], errors='coerce')
     df.rename(columns={'Discharge (cfs)': 'Discharge'}, inplace=True)
@@ -97,10 +97,10 @@ def separate_date_parameters(df):
       pandas.DataFrame: DataFrame with 'Date' column split into 'Year', 'Month', 'Week', and 'Day' columns.
     """
     
-    df['Year'] = df.index.year
-    df['Month'] = df.index.month
+    df['Year'] = df['Date'].dt.year
+    df['Month'] = df['Date'].dt.month
     # df['Week'] = df['Date'].dt.week
-    df['Day'] = df.index.day
+    df['Day'] = df['Date'].dt.day
     
     return df
 
