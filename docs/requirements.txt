@@ -3,3 +3,4 @@ sphinx-autodocgen
 pandas
 numpy
 matplotlib
+plotly
