@@ -3,7 +3,7 @@
 
 **Home**
 ========
-The baseflow Python package is designed to ....
+The baseflow Python package is designed to calculate baseflows
 
 
 .. toctree::
