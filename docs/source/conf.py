@@ -28,9 +28,15 @@ version = '1.0.0'
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinxcontrib_autodocgen',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.coverage',
+    'sphinx.ext.viewcode',
 ]
+
+autodoc_default_options = {
+    'member-order': 'bysource',
+}
+autodoc_mock_imports = []
 
 templates_path = ['_templates']
 exclude_patterns = []
