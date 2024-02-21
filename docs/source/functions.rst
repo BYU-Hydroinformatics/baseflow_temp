@@ -2,11 +2,11 @@
    :file: translate.html
    
 **Functions**
-=================================
+=============
 intro to page
 
 **Function 1**
--------
+--------------
 describe function.
 
 you might want to use a table to template each function's inputs and outputs. Something like this:
