@@ -57,11 +57,11 @@ def plot_discharge_and_models(df, model_columns):
         model_columns = ['Lyne_Hollick', 'Chapman', 'New_Model']
         plot_discharge_and_models(df, model_columns)
     """
-        
+
     # Extract Date and Discharge columns
     date = df['Date']
     discharge = df['Discharge']
-    
+
     # Create a plot for Discharge
     plt.figure(figsize=(14, 6))
     plt.plot(date, discharge, label='Discharge', color='blue', linewidth=2)
@@ -80,4 +80,3 @@ def plot_discharge_and_models(df, model_columns):
     # Show the plot
     plt.tight_layout()
     plt.show()
-

@@ -1,1 +1,6 @@
 sphinx-rtd-theme
+sphinx-autodocgen
+pandas
+numpy
+matplotlib
+plotly
