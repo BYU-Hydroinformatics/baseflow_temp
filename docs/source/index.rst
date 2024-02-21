@@ -3,7 +3,7 @@
 
 **Home**
 ========
-The baseflow Python package is designed to calculate baseflows
+The baseflow Python package is designed to ....
 
 
 .. toctree::
@@ -11,6 +11,6 @@ The baseflow Python package is designed to calculate baseflows
     :caption: TABLE OF CONTENTS
 
     Home <self>
-    overview.rst
-    functions.rst
-    github.rst
+    overview
+    api_documentation
+    github
