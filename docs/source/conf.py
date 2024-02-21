@@ -18,6 +18,8 @@ version = '1.0.0'
 
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinxcontrib_autodocgen',
 ]
 
 templates_path = ['_templates']
