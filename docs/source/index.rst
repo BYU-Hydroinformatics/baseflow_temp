@@ -2,7 +2,7 @@
    :file: translate.html
 
 **Home**
-=======
+========
 The baseflow Python package is designed to ....
 
 
@@ -12,5 +12,5 @@ The baseflow Python package is designed to ....
 
     Home <self>
     overview
-    functions
+    api_documentation
     github
