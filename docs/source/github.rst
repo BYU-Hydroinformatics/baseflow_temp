@@ -1,9 +1,8 @@
 .. raw:: html
    :file: translate.html
    
-==================
-Contributors Guide
-==================
+**Using the Baseflow GitHub Repository**
+========================================
 Intro to page
 
 **Cloning the Repo**

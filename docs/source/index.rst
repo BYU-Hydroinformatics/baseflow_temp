@@ -11,6 +11,6 @@ The baseflow Python package is designed to ....
     :caption: TABLE OF CONTENTS
 
     Home <self>
-    overview
-    api_documentation
-    github
+    overview.rst
+    functions.rst
+    github.rst
