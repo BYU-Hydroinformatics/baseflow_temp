@@ -2,7 +2,7 @@
    :file: translate.html
 
 **Home**
-=======
+========
 The baseflow Python package is designed to ....
 
 
@@ -11,6 +11,6 @@ The baseflow Python package is designed to ....
     :caption: TABLE OF CONTENTS
 
     Home <self>
-    overview
-    functions
-    github
+    overview.rst
+    functions.rst
+    github.rst
