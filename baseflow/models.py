@@ -107,7 +107,7 @@ def eckhardt(streamflow_list, alpha, bfi_max):
 
 def chapman_maxwell(streamflow_list, k):
     """
-        Separates baseflow from a streamflow hydrograph using the Chapman & Maxwell method.
+    Separates baseflow from a streamflow hydrograph using the Chapman & Maxwell method.
 
     Args:
         streamflow_list (list): A list of streamflow values in chronological order.
