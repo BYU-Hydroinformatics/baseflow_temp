@@ -47,14 +47,14 @@ def lyne_hollick(streamflow_list, alpha):
 
 def chapman(streamflow_list, alpha, beta):
     '''
-    Returns the baseflow approximations using the Chapman equation.
+    Calculates baseflow approximations using the Chapman equation.
+    
+    Args:
+        streamflow_list (float series): A list of streamflow values
+        alpha (float): Hydrological recession constant between 0 and 1
 
-            Parameters:
-                    streamflow_list (float series): A list of streamflow values
-                    alpha (float): Hydrological recession constant between 0 and 1
-
-            Returns:
-                    baseflow (float series): A list of baseflow values
+    Returns:
+        baseflow (float series): A list of baseflow values
     '''
     if alpha < 0 or alpha > 1:
         print("Alpha must be between 0 and 1.")
