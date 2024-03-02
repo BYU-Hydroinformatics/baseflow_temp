@@ -75,6 +75,16 @@ def chapman(streamflow_list, alpha, beta):
 
 
 def eckhardt(streamflow_list, alpha, bfi_max):
+    '''
+    Calculates baseflow approximations using the Eckhardt equation.
+    
+    Args:
+        streamflow_list (float series): A list of streamflow values
+        alpha (float): Hydrological recession constant between 0 and 1
+
+    Returns:
+        baseflow (float series): A list of baseflow values
+    '''    
     if alpha <= 0 or alpha >= 1:
         print("Alpha must be between 0 and 1.")
     if bfi_max <= 0 or bfi_max >= 1:
@@ -99,12 +109,12 @@ def chapman_maxwell(streamflow_list, k):
     """
         Separates baseflow from a streamflow hydrograph using the Chapman & Maxwell method.
 
-        Parameters:
-            streamflow_list (list): A list of streamflow values in chronological order.
-            k (float): A smoothing parameter between 0 and 1.
+    Args:
+        streamflow_list (list): A list of streamflow values in chronological order.
+        k (float): A smoothing parameter between 0 and 1.
 
-        Returns:
-            list: A list containing the separated baseflow values.
+    Returns:
+        list: A list containing the separated baseflow values.
   """
     if k < 0 or k > 1:
         print("k must be between 0 and 1.")
