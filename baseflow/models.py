@@ -54,7 +54,15 @@ def chapman(streamflow_list, alpha, beta):
         alpha (float): Hydrological recession constant between 0 and 1
 
     Returns:
-        baseflow (float series): A list of baseflow values
+        list: A timeseries list of baseflow values
+
+    Example:
+        .. code-block:: python
+
+            import pandas as pd
+            discharge_time_series = pd.read_csv("/my/sample/file.csv")
+            alpha = 0.925
+            baseflow = chapman(discharge_time_series['Discharge'], alpha)
     '''
     if alpha < 0 or alpha > 1:
         print("Alpha must be between 0 and 1.")
@@ -81,9 +89,19 @@ def eckhardt(streamflow_list, alpha, bfi_max):
     Args:
         streamflow_list (float series): A list of streamflow values
         alpha (float): Hydrological recession constant between 0 and 1
+        bfi_max: BFImax is the maximum attainable value of the baseflow index, indicating the long-term ratio of baseflow to total streamflow computed using a filtering algorithm. It's always less than 1, implying the absence of direct runoff in a catchment. This suggests either highly permeable soil or flat terrain.
 
     Returns:
-        baseflow (float series): A list of baseflow values
+        list: A timeseries list of baseflow values
+
+    Example:
+        .. code-block:: python
+
+            import pandas as pd
+            discharge_time_series = pd.read_csv("/my/sample/file.csv")
+            alpha = 0.925
+            bfi_max = 0.8
+            baseflow = eckhardt(discharge_time_series['Discharge'], alpha, bfi_max)
     '''    
     if alpha <= 0 or alpha >= 1:
         print("Alpha must be between 0 and 1.")
@@ -114,7 +132,15 @@ def chapman_maxwell(streamflow_list, k):
         k (float): A smoothing parameter between 0 and 1.
 
     Returns:
-        list: A list containing the separated baseflow values.
+        list: A timeseries list of baseflow values.
+
+    Example:
+        .. code-block:: python
+
+            import pandas as pd
+            discharge_time_series = pd.read_csv("/my/sample/file.csv")
+            k = 0.9
+            baseflow = chapman_maxwell(discharge_time_series['Discharge'], k)
   """
     if k < 0 or k > 1:
         print("k must be between 0 and 1.")
