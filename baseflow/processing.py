@@ -132,3 +132,47 @@ def label_rows(df, prediction_columns, threshold):
     df.to_csv('labled_data.csv', index=False)
 
     return df
+
+
+def create_quantiles_dataframe(dates, streamflow_list, percentile):
+
+    date_df = pd.DataFrame({'Date': dates})
+    date_df['Day'] = date_df.loc[:,'Date'].dt.dayofyear
+    date_df['Week'] = date_df.loc[:,'Date'].dt.isocalendar().week
+    date_df['Month'] = date_df.loc[:,'Date'].dt.month
+    date_df['Season'] = 1
+    for i in date_df.index:
+        day = date_df.at[i, 'Day']
+        if 80 <= day < 172:  # March 20 to June 19
+            date_df.at[i, 'Season'] = 2
+        elif 172 <= day < 266:  # June 20 to September 21
+            date_df.at[i, 'Season'] = 3
+        elif 266 <= day < 356:  # September 22 to December 20
+            date_df.at[i, 'Season'] = 4
+    date_df['Year'] = date_df.loc[:,'Date'].dt.year
+    date_df['Streamflow (cfs)'] = df['Streamflow (cfs)']
+
+
+    thresholds_df = pd.DataFrame()
+    thresholds_df['Date'] = dates
+
+    thresholds_df['Daily Streamflow'] = df['Streamflow (cfs)']
+    thresholds_df['Weekly Streamflow'] = df.groupby([df['Date'].dt.year, df['Date'].dt.isocalendar().week])['Streamflow (cfs)'].mean().loc[list(zip(date_df['Year'], date_df['Week']))].values
+    thresholds_df['Monthly Streamflow'] = df.groupby([df['Date'].dt.year, df['Date'].dt.month])['Streamflow (cfs)'].mean().loc[list(zip(date_df['Year'], date_df['Month']))].values
+    thresholds_df['Seasonal Streamflow'] = df.groupby([date_df['Year'], date_df['Season']])['Streamflow (cfs)'].mean().loc[list(zip(date_df['Year'], date_df['Season']))].values
+    thresholds_df['Yearly Streamflow'] = df.groupby(df['Date'].dt.year)['Streamflow (cfs)'].mean().loc[date_df['Year']].values
+
+    total_daily_quantiles = date_df.groupby(['Day'])['Streamflow (cfs)'].quantile(percentile)
+    thresholds_df['Daily Threshold'] = date_df['Day'].map(total_daily_quantiles)
+    total_weekly_quantiles = date_df.groupby(['Week'])['Streamflow (cfs)'].quantile(percentile)
+    thresholds_df['Weekly Threshold'] = date_df['Week'].map(total_weekly_quantiles)
+    total_monthly_quantiles = date_df.groupby(['Month'])['Streamflow (cfs)'].quantile(percentile)
+    thresholds_df['Monthly Threshold'] = date_df['Month'].map(total_monthly_quantiles)
+    total_seasonal_quantiles = date_df.groupby(['Season'])['Streamflow (cfs)'].quantile(percentile)
+    thresholds_df['Seasonal Threshold'] = date_df['Season'].map(total_seasonal_quantiles)
+    total_yearly_quantiles = date_df.groupby(['Year'])['Streamflow (cfs)'].quantile(percentile)
+    thresholds_df['Yearly Threshold'] = date_df['Year'].map(total_yearly_quantiles)
+
+    thresholds_df = thresholds_df.round(1)
+    thresholds_df['Percentile'] = percentile
+    return thresholds_df
