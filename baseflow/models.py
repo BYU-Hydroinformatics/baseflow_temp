@@ -165,3 +165,43 @@ def chapman_maxwell(streamflow_list, k):
             quickflow_list.append(quickflow)
 
         return baseflow_list
+    
+def HydRun(streamflow_list, k, passes):
+    """
+    Separates baseflow from a streamflow hydrograph using a digital filter method.
+
+    Args:
+        streamflow_list (pandas.Series): A pandas Series of streamflow values in chronological order.
+        k (float): A filter coefficient between 0 and 1 (typically 0.9).
+        passes (int): Number of times the filter passes through the data (typically 4).
+
+    Returns:
+        list: A list of baseflow values.
+
+    Example:
+        >>> import pandas as pd
+        >>> discharge_time_series = pd.read_csv("/my/sample/file.csv")
+        >>> k = 0.9
+        >>> passes = 4
+        >>> baseflow_list = HydRun(discharge_time_series['Discharge'], k, passes)
+    """
+    # Convert to numpy array and handle NaN values
+    Q = streamflow_list.to_numpy()
+    Q = Q[~np.isnan(Q)]
+
+    # Initialize baseflow list
+    baseflow_list = []
+    baseflow_list.append(Q[0])  # Set first baseflow value to first streamflow value
+
+    for p in range(1, passes + 1):
+        # Forward and backward pass
+        if p % 2 == 1:
+            start, end, step = 0, len(Q), 1
+        else:
+            start, end, step = len(Q) - 1, -1, -1
+
+        for i in range(start + step, end, step):
+            tmp = k * baseflow_list[i - step] + (1 - k) * (Q[i] + Q[i - step]) / 2
+            baseflow_list.append(min(tmp, Q[i]))
+
+    return baseflow_list
