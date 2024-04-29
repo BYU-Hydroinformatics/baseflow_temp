@@ -166,8 +166,8 @@ def chapman_maxwell(streamflow_list, k):
 
         return baseflow_list
     
-    
-def HydRun(streamflow_list, k, passes):
+
+def hyd_run(streamflow_list, k, passes):
     """
     Separates baseflow from a streamflow hydrograph using a digital filter method.
 
