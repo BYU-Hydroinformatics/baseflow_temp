@@ -180,11 +180,13 @@ def hyd_run(streamflow_list, k, passes):
         list: A list of baseflow values.
 
     Example:
-        >>> import pandas as pd
-        >>> discharge_time_series = pd.read_csv("/my/sample/file.csv")
-        >>> k = 0.9
-        >>> passes = 4
-        >>> baseflow_list = HydRun(discharge_time_series['Discharge'], k, passes)
+        .. code-block:: python
+        
+            import pandas as pd
+            discharge_time_series = pd.read_csv("/my/sample/file.csv")
+            k = 0.9
+            passes = 4
+            baseflow_list = HydRun(discharge_time_series['Discharge'], k, passes)
     """
     # Convert to numpy array and handle NaN values
     Q = streamflow_list.to_numpy()
