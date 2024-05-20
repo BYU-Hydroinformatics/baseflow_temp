@@ -278,3 +278,4 @@ def calculate_furey_gupta_baseflow(streamflow_list, gamma, c1, c3, d=0):
 
         return baseflow_list
 
+
