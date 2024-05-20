@@ -237,17 +237,6 @@ def calculate_tr55_baseflow(streamflow_list, precipitation, CN, Ia = None):
 
     return baseflow_list
 
-def what_baseflow_separation(df, BFImax, alpha):
-    streamflow = df['streamflow'].values
-    baseflow = np.zeros_like(streamflow)
-
-    for t in range(1, len(streamflow)):
-        baseflow[t] = ((1 - BFImax) * alpha * baseflow[t-1] + (1 - alpha) * BFImax * streamflow[t]) / (1 - alpha * BFImax)
-
-    quickflow = streamflow - baseflow
-
-    return baseflow, quickflow
-
 def calculate_boughton_baseflow(streamflow_list, k, C):
     if k < 0 or k > 1:
         print("k must be between 0 and 1.")
