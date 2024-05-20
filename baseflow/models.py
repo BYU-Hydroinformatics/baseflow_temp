@@ -219,3 +219,73 @@ def what_baseflow_separation(df, BFImax, alpha):
     quickflow = streamflow - baseflow
 
     return baseflow, quickflow
+
+def calculate_tr55_baseflow(streamflow_list, precipitation, CN, Ia = None):
+    if Ia == None:
+        Ia = 200/CN - 2
+
+    streamflow_list.dropna(inplace=True)
+    streamflow_list.reset_index(drop=True, inplace=True)
+
+    baseflow_value = streamflow_list[0]
+    baseflow_list = [baseflow_value]
+
+    for currentStreamflow, prec_value in zip((streamflow_list)[1:], precipitation[1:]):
+        baseflow_value = currentStreamflow - ((prec_value - Ia)**2 / (prec_value - Ia + (1000/CN - 10)))
+
+        baseflow_list.append(baseflow_value)
+
+    return baseflow_list
+
+def what_baseflow_separation(df, BFImax, alpha):
+    streamflow = df['streamflow'].values
+    baseflow = np.zeros_like(streamflow)
+
+    for t in range(1, len(streamflow)):
+        baseflow[t] = ((1 - BFImax) * alpha * baseflow[t-1] + (1 - alpha) * BFImax * streamflow[t]) / (1 - alpha * BFImax)
+
+    quickflow = streamflow - baseflow
+
+    return baseflow, quickflow
+
+def calculate_boughton_baseflow(streamflow_list, k, C):
+    if k < 0 or k > 1:
+        print("k must be between 0 and 1.")
+    if C < 0:
+        print("C must be a positive value.")
+
+    else:
+        streamflow_list.dropna(inplace=True)
+        streamflow_list.reset_index(drop=True, inplace=True)
+
+        baseflow_value = streamflow_list[0]
+        baseflow_list = [baseflow_value]
+
+        for currentStreamflow in streamflow_list[1:]:
+            baseflow_value = (k/(1 + C)) * baseflow_value + (C/(1 + C)) * currentStreamflow
+            baseflow_list.append(baseflow_value)
+
+        return baseflow_list
+
+def calculate_furey_gupta_baseflow(streamflow_list, gamma, c1, c3, d=0):
+    if gamma < 0 or gamma > 1:
+        print("Gamma must be between 0 and 1.")
+
+    else:
+        baseflow_list = []
+
+        streamflow_list.dropna(inplace=True)
+        streamflow_list.reset_index(drop=True, inplace=True)
+
+        # Initial baseflow value assumed to be same as streamflow
+        baseflow_list.append(streamflow_list[0])
+
+        for i in range(1, len(streamflow_list)):
+            Q_t_minus_1 = streamflow_list.at[i - 1]
+            b_t_minus_1 = baseflow_list[-1]
+
+            bt = (1 - gamma) * b_t_minus_1 + gamma * (c3 / c1) * (Q_t_minus_1 - b_t_minus_1)
+            baseflow_list.append(bt)
+
+        return baseflow_list
+
