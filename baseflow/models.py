@@ -208,3 +208,14 @@ def hyd_run(streamflow_list, k, passes):
             baseflow_list.append(min(tmp, Q[i]))
 
     return baseflow_list
+
+def what_baseflow_separation(df, BFImax, alpha):
+    streamflow = df['streamflow'].values
+    baseflow = np.zeros_like(streamflow)
+
+    for t in range(1, len(streamflow)):
+        baseflow[t] = ((1 - BFImax) * alpha * baseflow[t-1] + (1 - alpha) * BFImax * streamflow[t]) / (1 - alpha * BFImax)
+
+    quickflow = streamflow - baseflow
+
+    return baseflow, quickflow
