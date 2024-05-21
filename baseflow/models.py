@@ -209,7 +209,7 @@ def hyd_run(streamflow_list, k, passes):
 
     return baseflow_list
 
-def what_baseflow_separation(df, BFImax, alpha):
+def what(df, BFImax, alpha):
     streamflow = df['streamflow'].values
     baseflow = np.zeros_like(streamflow)
 
@@ -220,7 +220,7 @@ def what_baseflow_separation(df, BFImax, alpha):
 
     return baseflow, quickflow
 
-def calculate_tr55_baseflow(streamflow_list, precipitation, CN, Ia = None):
+def tr55(streamflow_list, precipitation, CN, Ia = None):
     if Ia == None:
         Ia = 200/CN - 2
 
@@ -237,7 +237,7 @@ def calculate_tr55_baseflow(streamflow_list, precipitation, CN, Ia = None):
 
     return baseflow_list
 
-def calculate_boughton_baseflow(streamflow_list, k, C):
+def boughton(streamflow_list, k, C):
     if k < 0 or k > 1:
         print("k must be between 0 and 1.")
     if C < 0:
@@ -256,7 +256,7 @@ def calculate_boughton_baseflow(streamflow_list, k, C):
 
         return baseflow_list
 
-def calculate_furey_gupta_baseflow(streamflow_list, gamma, c1, c3, d=0):
+def furey_gupta(streamflow_list, gamma, c1, c3, d=0):
     if gamma < 0 or gamma > 1:
         print("Gamma must be between 0 and 1.")
 
