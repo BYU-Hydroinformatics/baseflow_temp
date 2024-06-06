@@ -2,7 +2,25 @@ import numpy as np
 
 
 def lyne_hollick(streamflow_list, alpha):
+"""
+    Calculates baseflow approximations using the Lyne and Hollick equation.
+    
+    Args:
+        streamflow_list (pandas series): A list of streamflow values
+        alpha (float): Catchment constant between 0 and 1
+    
+    Returns:
+        list: A timeseries list of baseflow values
+    
+    Example:
+        .. code-block:: python
+    
+            import pandas as pd
+            discharge_time_series = pd.read_csv("/my/sample/file.csv")
+            alpha = 0.925
+            baseflow = lyne_hollick(discharge_time_series['Discharge'], alpha)
     """
+        """
     Calculates baseflow approximations using the Lyne and Hollick equation.
 
     Args:
@@ -256,7 +274,7 @@ def boughton(streamflow_list, k, C):
 
         return baseflow_list
 
-def furey_gupta(streamflow_list, gamma, c1, c3, d=0):
+def furey_gupta(streamflow_list, gamma, c1, c3):
     if gamma < 0 or gamma > 1:
         print("Gamma must be between 0 and 1.")
 
