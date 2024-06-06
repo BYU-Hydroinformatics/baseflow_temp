@@ -6,7 +6,7 @@ def lyne_hollick(streamflow_list, alpha):
     Calculates baseflow approximations using the Lyne and Hollick equation.
 
     Args:
-        streamflow_list (list): A list of streamflow values
+        streamflow_list (pandas series): A list of streamflow values
         alpha (float): Catchment constant between 0 and 1
 
     Returns:
@@ -50,7 +50,7 @@ def chapman(streamflow_list, alpha, beta):
     Calculates baseflow approximations using the Chapman equation.
     
     Args:
-        streamflow_list (float series): A list of streamflow values
+        streamflow_list (pandas series): A list of streamflow values
         alpha (float): Hydrological recession constant between 0 and 1
 
     Returns:
@@ -87,7 +87,7 @@ def eckhardt(streamflow_list, alpha, bfi_max):
     Calculates baseflow approximations using the Eckhardt equation.
     
     Args:
-        streamflow_list (float series): A list of streamflow values
+        streamflow_list (pandas series): A list of streamflow values
         alpha (float): Hydrological recession constant between 0 and 1
         bfi_max: BFImax is the maximum attainable value of the baseflow index, indicating the long-term ratio of baseflow to total streamflow computed using a filtering algorithm. It's always less than 1, implying the absence of direct runoff in a catchment. This suggests either highly permeable soil or flat terrain.
 
@@ -128,7 +128,7 @@ def chapman_maxwell(streamflow_list, k):
     Separates baseflow from a streamflow hydrograph using the Chapman & Maxwell method.
 
     Args:
-        streamflow_list (list): A list of streamflow values in chronological order.
+        streamflow_list (pandas series): A list of streamflow values in chronological order.
         k (float): A smoothing parameter between 0 and 1.
 
     Returns:
