@@ -7,9 +7,7 @@ How to use
 
 How to install
 
-Etc
-
-Etc
+How to contribute
 
 
 **CIROH**
