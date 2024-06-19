@@ -16,6 +16,8 @@ Etc
 ---------
 Something here acknowledging our project, objectives, etc
 
+We need to add a link to the CIROH website, and provide more information about the project.
+
 include links to CIROH, NOAA
 
 https://ciroh.ua.edu/ 
